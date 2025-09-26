@@ -38,7 +38,6 @@ public class LicenseController {
 				linkTo(methodOn(LicenseController.class).updateLicense(organizationId, license)).withRel("updateLicense"),
 				linkTo(methodOn(LicenseController.class).deleteLicense(organizationId, license.getLicenseId())).withRel("deleteLicense")
 		);
-		
 		return ResponseEntity.ok(license);
 	}
 

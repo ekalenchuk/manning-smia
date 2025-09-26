@@ -1,22 +1,19 @@
 #stage 1
 #Start with a base image containing Java runtime
-FROM openjdk:11-slim as build
+FROM eclipse-temurin:21.0.8_9-jdk-ubi10-minimal as build
 
 # Add Maintainer Info
 LABEL maintainer="Illary Huaylupo <illaryhs@gmail.com>"
 
-# The application's jar file
-ARG JAR_FILE
-
 # Add the application's jar to the container
-COPY ${JAR_FILE} app.jar
+COPY target/licensing-service-0.0.1-SNAPSHOT.jar app.jar
 
 #unpackage jar file
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /app.jar)
 
 #stage 2
 #Same Java runtime
-FROM openjdk:11-slim
+FROM eclipse-temurin:21.0.8_9-jdk-ubi10-minimal
 
 #Add volume pointing to /tmp
 VOLUME /tmp
